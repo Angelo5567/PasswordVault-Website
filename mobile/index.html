@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101014">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PasswordVault">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <title>PasswordVault</title>
+</head>
+<body>
+  <main class="app">
+    <header class="top">
+      <div class="brand"><div class="logo">PV</div><div><h1>PasswordVault</h1><p>PRIVATE · LOCAL · SECURE</p></div></div>
+      <button id="lockBtn" class="icon-btn hidden" type="button" title="Blocca">🔒</button>
+    </header>
+
+    <section id="authScreen" class="panel auth">
+      <div class="shield">◆</div>
+      <h2 id="authTitle">Il tuo archivio, protetto.</h2>
+      <p id="authText">Crea una password principale per iniziare.</p>
+      <form id="authForm">
+        <label for="masterPassword">Password principale</label>
+        <input id="masterPassword" type="password" minlength="8" autocomplete="current-password" placeholder="Almeno 8 caratteri" required>
+        <div id="confirmWrap">
+          <label for="confirmPassword">Conferma password</label>
+          <input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" placeholder="Ripeti la password">
+        </div>
+        <p id="authError" class="error"></p>
+        <button class="primary" id="authSubmit" type="submit">Crea archivio</button>
+      </form>
+      <div class="auth-tools">
+        <button id="importBtn" class="text-btn" type="button">Importa archivio esistente</button>
+        <input id="importFile" type="file" accept=".dat,.json,application/json" hidden>
+      </div>
+      <p class="fine">La cifratura avviene direttamente su questo dispositivo.</p>
+    </section>
+
+    <section id="vaultScreen" class="hidden">
+      <div class="welcome"><div><h2>Il tuo archivio</h2><p id="entryCount">0 password salvate</p></div><span class="secure">● PROTETTO</span></div>
+      <div class="panel add-panel">
+        <h3>Nuova password</h3>
+        <form id="entryForm">
+          <label for="site">Sito o servizio</label>
+          <input id="site" type="text" placeholder="es. Google, Instagram..." required maxlength="120">
+          <label for="newPassword">Password</label>
+          <div class="password-row">
+            <input id="newPassword" type="text" placeholder="Inserisci o genera una password" required maxlength="512">
+            <button type="button" id="generateBtn" class="secondary">Genera</button>
+          </div>
+          <button type="submit" class="primary">＋ Salva password</button>
+        </form>
+      </div>
+
+      <div class="list-heading"><h3>Le tue password</h3><button id="exportBtn" class="text-btn" type="button">Esporta archivio ↗</button></div>
+      <input id="search" class="search" type="search" placeholder="⌕  Cerca un sito o servizio...">
+      <div id="entries" class="entries"></div>
+
+      <details class="panel settings">
+        <summary>Impostazioni e sicurezza</summary>
+        <label for="autoLock">Blocco automatico</label>
+        <select id="autoLock">
+          <option value="1">Dopo 1 minuto</option>
+          <option value="5" selected>Dopo 5 minuti</option>
+          <option value="10">Dopo 10 minuti</option>
+          <option value="30">Dopo 30 minuti</option>
+          <option value="0">Mai (sconsigliato)</option>
+        </select>
+        <button id="changeMasterBtn" class="secondary full" type="button">Cambia password principale</button>
+        <button id="importVaultBtn" class="secondary full" type="button">Importa archivio</button>
+        <button id="lockNowBtn" class="danger full" type="button">Blocca archivio</button>
+        <p class="fine">L'archivio salvato nel browser è cifrato. Conserva una copia esportata in un luogo sicuro.</p>
+      </details>
+    </section>
+    <footer>PASSWOR DVAULT MOBILE · AES-128 · PBKDF2 SHA-256</footer>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
